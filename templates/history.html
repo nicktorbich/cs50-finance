@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                {% for element in header %}
+                    <th scope="col">{{ element }}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for stock in stocks %}
+                {% if stock['type'] == 'BUY' %}
+                <tr scope="row" class="table-success">
+                {% elif stock['type'] == 'SELL' %}
+                <tr scope="row" class="table-danger">
+                {% endif %}
+                    <td>{{ stock['type'] }}</td>
+                    <td>{{ stock['symbol'] }}</td>
+                    <td>{{ stock['shares'] }}</td>
+                    <td>{{ stock['price'] }}</td>
+                    <td>{{ stock['timestamp'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

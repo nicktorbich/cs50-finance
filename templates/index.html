@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                {% for element in header %}
+                    <th scope="col">{{ element }}</th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for stock in stocks %}
+                <tr scope="row">
+                    <td>{{ stock['symbol'] }}</td>
+                    <td>{{ stock['name'] }}</td>
+                    <td>{{ stock['SUM(shares)'] }}</td>
+                    <td>{{ stock['price'] }}</td>
+                    <td>{{ stock['total'] }}</td>
+                </tr>
+                {% endfor %}
+                <tr scope="row">
+                    <td>CASH</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ cash }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>{{ total }}</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
