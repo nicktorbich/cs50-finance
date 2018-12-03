@@ -1,4 +1,5 @@
 import os
+import psycopg2
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -35,9 +36,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-# Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
-
+db = SQL(os.environ.get("DATABASE_URL") or "sqlite:///finance.db")
 
 @app.route("/")
 @login_required
@@ -336,3 +335,7 @@ def errorhandler(e):
 # listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
